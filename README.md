@@ -1,11 +1,6 @@
 # <img src="public/icons/icon_48.png" width="45" align="left"> Alura Auto
 
-My Chrome Extension
-
-## Features
-
-- Feature 1
-- Feature 2
+Alura Auto (Chrome/Opera Extension)
 
 ## Install
 

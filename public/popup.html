@@ -1,32 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>My Chrome Extension</title>
+    <title>Alura Auto</title>
     <link rel="stylesheet" href="popup.css" />
 </head>
 <body>
   <div class="app">
-    <p class="counter-label">Counter</p>
-    <div id="counter" class="counter"></div>
-    <div class="button-container">
-      <button id="decrementBtn" class="button">-</button>
-      <button id="incrementBtn" class="button">+</button>
+    <p class="title"><img src="icons/icon_32.png" alt=""> Alura Auto</p>
+    <p class="subtitle">Selecione suas opções:</p>
+
+    <div class="options">
+      <div class="option">
+        <input type="checkbox" name="bolNext" id="bolNext"> 
+        <label for="bolNext">
+          Redirecionar para próxima atividade ao finalizar vídeo
+        </label>
+      </div>
+      <div class="option suboption">
+        <input type="checkbox" name="bolNextVideo" id="bolNextVideo"> 
+        <label for="bolNextVideo">
+          Redirecionar para próxima atividade com vídeo
+        </label>
+      </div>
+      <div class="option">
+        <input type="checkbox" name="bolPlayVideoAuto" id="bolPlayVideoAuto"> 
+        <label for="bolPlayVideoAuto">
+          Iniciar vídeo ao entrar na atividade
+        </label>
+      </div>
+      
     </div>
 
-    <hr class="divider" />
-
-    <p class="title">Chrome Extension is Ready!</p>
-    <p class="subtitle">Start by updating <code>popup.html</code></p>
+    <hr class="divider" />    
+    <p class="footer-subtitle">Desenvolvido por <a href="https://github.com/samueledson" target="_blank">@samueledson</a></p>
   </div>
 
   <script src="popup.js"></script>
 
-  <!--
-    This HTML file opens when you click on icon from the toolbar.
-
-    To begin the development, run `npm run watch`.
-    To create a production bundle, use `npm run build`.
-  -->
 </body>
 </html>

@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Alura Auto",
   "version": "0.1.0",
   "description": "Extensão de navegador para automatizar e facilitar assistir as aulas na plataforma Alura Cursos",
@@ -9,12 +9,14 @@
     "48": "icons/icon_48.png",
     "128": "icons/icon_128.png"
   },
-  "browser_action": {
+  "action": {
     "default_title": "Alura Auto",
     "default_popup": "popup.html"
   },
   "permissions": [
-    "storage",
+    "storage"
+  ],
+  "host_permissions": [
     "https://cursos.alura.com.br/"
   ],
   "content_scripts": [

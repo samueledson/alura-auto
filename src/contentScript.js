@@ -1,43 +1,91 @@
 'use strict';
 
-// Content script file will run in the context of web page.
-// With content script you can manipulate the web pages using
-// Document Object Model (DOM).
-// You can also pass information to the parent extension.
+window.addEventListener('load', function () {
 
-// We execute this script by making an entry in manifest.json file
-// under `content_scripts` property
+  const mediaVideo = document.getElementById("video-player_html5_api");
 
-// For more information on Content Scripts,
-// See https://developer.chrome.com/extensions/content_scripts
+  const options = {};
 
-// Log `title` of current active web page
-const pageTitle = document.head.getElementsByTagName('title')[0].innerHTML;
-console.log(
-  `Page title is: '${pageTitle}' - evaluated by Chrome extension's 'contentScript.js' file`
-);
-
-// Communicate with background file by sending a message
-chrome.runtime.sendMessage(
-  {
-    type: 'GREETINGS',
-    payload: {
-      message: 'Hello, my name is Con. I am from ContentScript.',
-    },
-  },
-  response => {
-    console.log(response.message);
-  }
-);
-
-// Listen for message
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.type === 'COUNT') {
-    console.log(`Current count is ${request.payload.count}`);
+  const getAllStorageSyncData = () => {
+    return new Promise((resolve, reject) => {
+      chrome.storage.sync.get(null, (items) => {
+        if (chrome.runtime.lastError) {
+          return reject(chrome.runtime.lastError);
+        }
+        resolve(items);
+      });
+    });
   }
 
-  // Send an empty response
-  // See https://github.com/mozilla/webextension-polyfill/issues/130#issuecomment-531531890
-  sendResponse({});
-  return true;
+  const initStorageCache = getAllStorageSyncData().then(items => {
+    Object.assign(options, items.options);
+  });
+
+  /*** MODULE - AUTO REDIRECT ***/
+  const autoRedirect = () => {
+    var videoLinksHTML = document.getElementsByClassName(
+      "task-menu-nav-item-link task-menu-nav-item-link-VIDEO"
+    );
+  
+    var videoLinks = [];
+  
+    for (var i = 0; i < videoLinksHTML.length; i++) {
+      videoLinks.push(videoLinksHTML[i].href);
+    }
+  
+    var currentVideoLink = document.location.href;
+    var currentVideoLinkIndex = videoLinks.indexOf(currentVideoLink);
+    var nextVideoLinkIndex = videoLinks[currentVideoLinkIndex + 1];
+  
+    mediaVideo.addEventListener("ended", () => {
+      var urlNext = null;
+      if (!options.bolNextVideo)
+        urlNext = currentVideoLink + "/next";
+      else if(nextVideoLinkIndex !== undefined) {
+        urlNext = nextVideoLinkIndex;
+      }
+      if(urlNext !== null)
+        document.location.href = urlNext;
+    });
+  }
+
+  /*** MODULE - AUTO PLAY ***/
+  const autoPlay = () => {
+    mediaVideo.addEventListener(
+      "canplay",
+      function () {
+
+        mediaVideo.muted = true;
+        mediaVideo.volume = 0;
+
+        mediaVideo.autoplay = true;
+        mediaVideo.play();
+        
+        mediaVideo.muted = false;
+        mediaVideo.volume = 1;
+      },
+      false
+    );
+  }
+
+  const fire = async () => {
+
+    try {
+
+      await initStorageCache;
+
+      if(options.bolNext && mediaVideo !== null)
+        autoRedirect();
+
+      if (options.bolPlayVideoAuto && mediaVideo !== null)
+        autoPlay();
+
+    } catch (e) {
+      console.log(e);
+    }    
+      
+  }
+
+  fire();    
+
 });

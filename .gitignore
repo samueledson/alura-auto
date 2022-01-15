@@ -8,3 +8,7 @@
 .DS_Store
 
 npm-debug.log*
+build.crx
+build.pem
+size-plugin.json
+/others

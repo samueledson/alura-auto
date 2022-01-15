@@ -1,7 +1,7 @@
 {
   "name": "alura-auto",
   "version": "0.1.0",
-  "description": "My Chrome Extension",
+  "description": "Extensão de navegador para automatizar e facilitar assistir as aulas na plataforma Alura Cursos",
   "private": true,
   "scripts": {
     "watch": "webpack --mode=development --watch --config config/webpack.config.js",
