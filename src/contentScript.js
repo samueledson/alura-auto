@@ -59,10 +59,18 @@ window.addEventListener('load', function () {
         mediaVideo.volume = 0;
 
         mediaVideo.autoplay = true;
-        mediaVideo.play();
-        
-        mediaVideo.muted = false;
-        mediaVideo.volume = 1;
+
+        var playPromise = mediaVideo.play();
+
+        if (playPromise !== undefined) {
+          playPromise.then(_ => {
+            mediaVideo.muted = false;
+            mediaVideo.volume = 1;
+          })
+          .catch(error => {
+            
+          });
+        }
       },
       false
     );
