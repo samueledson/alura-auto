@@ -22,6 +22,8 @@ Acesse a [Chrome Web Store](https://chrome.google.com/webstore/detail/alura-auto
 4. Ao finalizar um vídeo, a extensão irá redirecionar automaticamente para a próxima atividade (se houver) ou para a próxima atividade com vídeo (se a próxima atividade incluir um vídeo).
 5. Caso queira desativar algum dos recursos, basta clicar no botão correspondente na página do curso.
 
+![image](https://user-images.githubusercontent.com/3043984/227227918-78aeb435-b313-4b0a-b6a3-61efd6555c94.png)
+
 ## Contribuição
 
 Se você quiser contribuir com o projeto, sinta-se à vontade para enviar um pull request com suas alterações. Antes de enviar, verifique se o código está formatado corretamente e que não há erros ou problemas de compatibilidade com outros navegadores.
